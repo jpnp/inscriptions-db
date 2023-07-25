@@ -8,3 +8,13 @@ services:
       - .:/code
     environment:
       FLASK_DEBUG: "true" 
+  solr:
+    image: solr:8
+    ports:
+      - "8983:8983"
+    volumes:
+      - ./solr:/solr-conf
+    command:
+      - solr-precreate
+      - foo
+      - /solr-conf
