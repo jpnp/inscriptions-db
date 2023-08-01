@@ -6,9 +6,9 @@ from flask import Flask, render_template
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
-    #app.config.from_mapping(
-    #    SECRET_KEY='dev',
-    #)
+    app.config.from_mapping(
+        SOLR_CORE='http://solr:8983/solr/foo/'
+    )
 
     if test_config is None:
         # load the instance config, if it exists, when not testing
@@ -32,6 +32,9 @@ def create_app(test_config=None):
     @app.route('/about')
     def about():
         return render_template('about.html')
+
+    from . import search
+    app.add_url_rule('/results', 'results', search.results)
 
     return app
 
