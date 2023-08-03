@@ -1,6 +1,7 @@
 import os
 
 from flask import Flask, render_template
+import click
 
 
 def create_app(test_config=None):
@@ -35,6 +36,12 @@ def create_app(test_config=None):
 
     from . import search
     app.add_url_rule('/results', 'results', search.results)
+
+    # CLI command
+    @app.cli.command('index-csv')
+    @click.argument('file')
+    def index_csv(file):
+        print("File to index: "+file)
 
     return app
 
