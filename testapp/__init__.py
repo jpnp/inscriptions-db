@@ -38,10 +38,12 @@ def create_app(test_config=None):
     app.add_url_rule('/results', 'results', search.results)
 
     # CLI command
+    from . import index
     @app.cli.command('index-csv')
     @click.argument('file')
     def index_csv(file):
         print("File to index: "+file)
+        index.index_csv(file)
 
     return app
 
