@@ -469,7 +469,7 @@
   <field name="purpose" type="string" uninvertible="false" docValues="true" indexed="true" stored="true"/>
   <field name="context" type="string" uninvertible="false" docValues="true" indexed="true" stored="true"/>
   <field name="denomination" type="string" uninvertible="false" docValues="true" indexed="true" stored="true"/>
-  <field name="notes" type="text_en" uninvertible="false" docValues="true" indexed="true" stored="true"/>
+  <field name="notes" type="text_en" uninvertible="false" indexed="true" stored="true"/>
   <!-- todo: DATE/CERTAINTY, LINES, MATERIAL, NATURE, REFERENCE 2, REFERENCE 3, TRISMEGISTOS ID -->
   <dynamicField name="*_txt_en_split_tight" type="text_en_splitting_tight" indexed="true" stored="true"/>
   <dynamicField name="*_descendent_path" type="descendent_path" indexed="true" stored="true"/>
