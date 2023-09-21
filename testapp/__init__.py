@@ -42,7 +42,7 @@ def create_app(test_config=None):
     @app.cli.command('index-csv')
     @click.argument('file')
     def index_csv(file):
-        print("File to index: "+file)
+        #print("File to index: "+file)
         index.index_csv(file)
 
     return app
