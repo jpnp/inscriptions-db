@@ -5,6 +5,7 @@
 <br>
 {% for item in res %} 
 <div>
+	<a href="{{url_for('item', id=item.id)}}">{{item.id}}</a>
   {{ item.city}}: {{item.date_from}} - {{item.date_to}}  {{item.description}} 
 </div>
 {% endfor %}

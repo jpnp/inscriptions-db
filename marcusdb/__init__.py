@@ -37,6 +37,9 @@ def create_app(test_config=None):
     from . import search
     app.add_url_rule('/results', 'results', search.results)
 
+    from . import item
+    app.add_url_rule('/item/<id>', 'item', item.show)
+
     # CLI command
     from . import index
     @app.cli.command('index-csv')
