@@ -1,6 +1,6 @@
 FROM python:3.11-alpine
 WORKDIR /code
-ENV FLASK_APP=testapp
+ENV FLASK_APP=marcusdb
 ENV FLASK_RUN_HOST=0.0.0.0
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
