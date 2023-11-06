@@ -44,9 +44,10 @@ def create_app(test_config=None):
     from . import index
     @app.cli.command('index-csv')
     @click.argument('file')
-    def index_csv(file):
+    @click.option('--section', '-s', default='1')
+    def index_csv(file, section):
         #print("File to index: "+file)
-        index.index_csv(file)
+        index.index_csv(file, section)
 
     return app
 

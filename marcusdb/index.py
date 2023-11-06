@@ -78,6 +78,7 @@ solr_fields = {
 
 processed = 0
 ln = 0
+sectionId = ''
 stored = {}
 docs = []
 
@@ -87,7 +88,7 @@ def printe(*args, **kwargs):
 
 def mkdoc(l, s):
     out = " <doc>\n"
-    out += '  <field name="id">item-' + str(ln) + '</field>\n'
+    out += '  <field name="id">item-' + sectionId + '.' + str(ln) + '</field>\n'
     for sf in solr_fields:
         f = solr_fields[sf]
         if f in activity_fields:
@@ -103,6 +104,8 @@ def process_entry(l):
     if l[REGION]:
         stored[REGION] = l[REGION]
         #print(stored[REGION])
+        # Ignore other cells on region line
+        return
     if l[CITY]:
         stored[CITY] = l[CITY]
         stored[LAT] = l[LAT]
@@ -126,15 +129,17 @@ def process_entry(l):
         processed += 1
     else:
         if any(l[x] for x in activity_fields):
-            #print(ln, l[PURPOSE])
+            #printe(ln, l[PURPOSE])
             docs.append(mkdoc(l, stored))
             processed += 1
 
     return
 
-def index_csv(filename):
-    global processed, ln
+def index_csv(filename, section):
+    global processed, ln, sectionId
     printe("File to index: "+filename)
+
+    sectionId = section
 
     with open(filename, 'r') as infile:
         lines = csv.DictReader(infile)
@@ -143,6 +148,7 @@ def index_csv(filename):
         ln = 1
         for l in lines:
             ln += 1
+            #printe("line:",ln)
             process_entry(l)
             if processed >=200:
                 printe("count:",processed , total)
