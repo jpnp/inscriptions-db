@@ -1,6 +1,7 @@
 
 import csv
 import sys
+import re
 from xml.sax.saxutils import escape
 
 # id
@@ -86,6 +87,10 @@ docs = []
 def printe(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)
 
+def fix_region(region):
+    """Fix region names which also have descriptions in parens"""
+    return re.sub(' *\(.*\)', '', region)
+
 def mkdoc(l, s):
     out = " <doc>\n"
     out += '  <field name="id">item-' + sectionId + '.' + str(ln) + '</field>\n'
@@ -102,7 +107,7 @@ def mkdoc(l, s):
 def process_entry(l):
     global processed, stored, docs
     if l[REGION]:
-        stored[REGION] = l[REGION]
+        stored[REGION] = fix_region(l[REGION])
         #print(stored[REGION])
         # Ignore other cells on region line
         return

@@ -46,6 +46,7 @@ def create_app(test_config=None):
     @click.argument('file')
     @click.option('--section', '-s', default='1')
     def index_csv(file, section):
+        """Convert a CSV file to solr XML on STDOUT"""
         #print("File to index: "+file)
         index.index_csv(file, section)
 
