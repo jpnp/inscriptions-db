@@ -1,6 +1,6 @@
 #! /bin/bash
 
-CORE="${CORE:-inscriptions}"
+CORE="${CORE:-foo}"
 DATA=ionia.xml
 
 echo Uploading ${DATA} to core ${CORE}
